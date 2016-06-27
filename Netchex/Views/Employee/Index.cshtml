@@ -1,0 +1,29 @@
+﻿@model Netchex.Models.Employee.EmployeesViewModel
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Edit")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Employees)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Edit", new { id = item.Id, readOnly = false }) |
+               @Html.ActionLink("Calculate Pay", "Calculate", new { id = item.Id, readOnly = false }) |
+                @item.LastName, @item.FirstName
+            </td>
+        </tr>
+    }
+
+</table>
