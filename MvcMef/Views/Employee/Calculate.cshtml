@@ -1,0 +1,167 @@
+﻿@model MvcMef.Models.Employee.EmployeeViewModel
+
+@{
+    ViewBag.Title = "View";
+    var isHourly = Model.Employee.IsHourly ? "Hourly" : "Salary";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Employee</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Employee.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.Employee.FirstName
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Employee.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.Employee.LastName
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Employee.Wages, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.Employee.Wages
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Employee.IsHourly, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @isHourly
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Employee.PayFrequencyId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.Fequencies.FirstOrDefault(x=>x.Id== Model.Employee.PayFrequencyId).Name
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Employee.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Model.Employee.StartDate
+                @Html.HiddenFor(model => model.Employee.Id)
+            </div>
+        </div>
+        <div id="calculator-container">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-2">
+                    <a class="btn btn-default" data-bind="click: calculate"  >Calculate</a>
+
+                </div>
+                <div class="col-md-3">
+                    <input type="text" data-bind="value: startDate" class="btn btn-default" />
+
+                </div>
+                <div class="col-md-3">
+                    <input type="text" data-bind="value: endDate,enable:false" class="btn btn-default" />
+
+                </div>
+                <div class="col-md-2">
+                    <input type="text" data-bind="value: pay,enable:false" class="btn btn-default" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts
+{
+<script type="text/javascript">
+    //TODO: Move model to seperate file location for models
+    model = function (json) {
+        var self = this;
+        self.data = json;
+        self.pay = ko.observable();
+
+        var calculateEndDate = function(date)
+        {
+            var days = moment(date);
+            switch (self.data.Employee.PayFrequencyId) {
+                case 1:
+                    days = moment(date).add('weeks', 1);
+                    break;
+                case 2:
+                    days = moment(date).add('months', 1);
+                    break;
+                case 3:
+                    days = moment(date).add('weeks', 2);
+                    break;
+                case 4:
+                    days = moment(date).add('months', .5).format('L');
+                    break;
+                 
+            }
+            
+            return days.subtract('days', 1).format('L');
+
+        }
+
+        function addWeekdays(date, days) {
+            date = moment(date); // use a clone
+            for (i = 0; i < days; i++) {
+                date = date.add(1, 'days');
+                // decrease "days" only if it's a weekday
+                var day = date.day();
+                var isWeekend = (day == 6) || (day == 0);
+                if (isWeekend) {
+                    days = days - 1;
+                }
+            }
+            return days;
+        }
+
+        var calculatePay = function () {
+           
+            var start = moment(self.startDate())
+            var end = moment(self.endDate())
+            var days = end.diff(start, 'days')
+            var workdays = addWeekdays(start, days);
+            var payday;
+            if (self.data.Employee.IsHourly)
+            {
+                payday= self.data.Employee.Wages * 8 * workdays;
+            }
+            else
+            {
+                var hourlyWage = (self.data.Employee.Wages / 52) / 40
+                payday = hourlyWage * 8 * workdays;
+            }
+            var formattedPayday ="$" + payday.toFixed(2)
+            alert(formattedPayday);
+
+            self.pay(formattedPayday)
+        }
+        self.startDate = ko.observable(moment().format('L'));
+
+        self.startDate.subscribe(function (d) {
+
+            self.endDate(calculateEndDate(d))
+        });
+        self.endDate = ko.observable(calculateEndDate());
+        self.calculate = function () {
+            calculatePay();
+        };
+    }
+    var viewModel = new model(@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model)));
+    ko.applyBindings(viewModel, document.getElementById("calculator-container"));
+</script>
+}
