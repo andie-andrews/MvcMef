@@ -54,10 +54,12 @@
     <Compile Include="IApplicationContext.cs" />
     <Compile Include="IEmployeeService.cs" />
     <Compile Include="IMapping.cs" />
+    <Compile Include="IMefController.cs" />
     <Compile Include="IReferenceService.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IRepositoryQuery.cs" />
     <Compile Include="IRepositoryWorker.cs" />
+    <Compile Include="IViewModel.cs" />
     <Compile Include="MefBootstrap.cs" />
     <Compile Include="Models\IEmployee.cs" />
     <Compile Include="Models\IIdentity.cs" />

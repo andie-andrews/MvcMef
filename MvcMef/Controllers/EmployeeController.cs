@@ -13,7 +13,7 @@ namespace MvcMef.Controllers
     [ControllerExport(typeof(EmployeeController))]
     [PartCreationPolicy(System.ComponentModel.Composition.CreationPolicy.NonShared)]
     [Authorize]
-    public class EmployeeController : Controller
+    public class EmployeeController : Controller, IMefController
     {
       
         private ViewModelProvider viewModelProvider;

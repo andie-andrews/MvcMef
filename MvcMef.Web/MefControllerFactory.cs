@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MvcMef.Dependencies;
+using System;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace MvcMef.Web
         {
             IController result = null;
 
-            var export = this._container.GetExports(typeof(IController), null, controllerType.FullName).SingleOrDefault(x => x.Value.GetType() == controllerType);
+            var export = this._container.GetExports(typeof(IMefController), null, controllerType.FullName).SingleOrDefault(x => x.Value.GetType() == controllerType);
 
             if (null != export)
             {

@@ -6,8 +6,9 @@ using MvcMef.Models;
 namespace MvcMef.Controllers
 {
     [ControllerExportAttribute(typeof(HomeController))]
+    [ExportAttribute(typeof(IController))]
     [PartCreationPolicy(System.ComponentModel.Composition.CreationPolicy.NonShared)]
-    public class HomeController : Controller
+    public class HomeController : Controller, IMefController
     {
 
         private ViewModelProvider viewModelProvider;

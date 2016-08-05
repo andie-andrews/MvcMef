@@ -10,7 +10,7 @@
     {
         public static CompositionContainer Container { get; private set; }
 
-        public static void Register()
+        public static void Intialize()
         {
             List<string> files = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "MvcMef*.dll", SearchOption.AllDirectories)
                 .Where(o => !o.Replace(AppDomain.CurrentDomain.BaseDirectory, "").Contains(@"obj\")).ToList();

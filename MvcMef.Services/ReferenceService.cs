@@ -1,5 +1,4 @@
-﻿using System;
-using MvcMef.Dependencies;
+﻿using MvcMef.Dependencies;
 using System.ComponentModel.Composition;
 using MvcMef.Dependencies.Models;
 using System.Collections.Generic;

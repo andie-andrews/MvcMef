@@ -14,9 +14,10 @@ namespace MvcMef
         {
             ConfigureAuth(app);
 
-            MefBootstrap.Register();
+            MefBootstrap.Intialize();
 
             ControllerBuilder.Current.SetControllerFactory(new MefControllerFactory(MefBootstrap.Container));
+
         }
     }
 }

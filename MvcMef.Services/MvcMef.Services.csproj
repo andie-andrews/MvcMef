@@ -69,7 +69,7 @@
       <Name>MvcMef.Dependencies</Name>
     </ProjectReference>
     <ProjectReference Include="..\MvcMef.Dto\MvcMef.Dto.csproj">
-      <Project>{7710885F-9EB4-49DE-A83A-F022C9B5D589}</Project>
+      <Project>{7710885f-9eb4-49de-a83a-f022c9b5d589}</Project>
       <Name>MvcMef.Dto</Name>
     </ProjectReference>
   </ItemGroup>

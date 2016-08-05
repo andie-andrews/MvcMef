@@ -13,11 +13,11 @@ namespace MvcMef.Controllers
     using System.ComponentModel.Composition;
 
     using MvcMef.Web;
-
+    using Dependencies;
     [ControllerExport(typeof(ManageController))]
     [PartCreationPolicy(System.ComponentModel.Composition.CreationPolicy.NonShared)]
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : Controller, IMefController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

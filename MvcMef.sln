@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMef.Dto", "MvcMef.Dto\Mv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMef.Repository", "MvcMef.Repository\MvcMef.Repository.csproj", "{F67D5970-2087-40B5-993D-79A787E12CD2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMef.Controllers", "MvcMef.Controllers\MvcMef.Controllers.csproj", "{4097F54C-3DBE-47C9-A369-ACBE16E24223}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{F67D5970-2087-40B5-993D-79A787E12CD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F67D5970-2087-40B5-993D-79A787E12CD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F67D5970-2087-40B5-993D-79A787E12CD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4097F54C-3DBE-47C9-A369-ACBE16E24223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4097F54C-3DBE-47C9-A369-ACBE16E24223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4097F54C-3DBE-47C9-A369-ACBE16E24223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4097F54C-3DBE-47C9-A369-ACBE16E24223}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
