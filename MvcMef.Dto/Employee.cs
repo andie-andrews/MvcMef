@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MvcMef.Dependencies.Models;
 namespace MvcMef.Dto
 {
+    [Export(typeof(IEmployee))]
+    [PartCreationPolicy(System.ComponentModel.Composition.CreationPolicy.NonShared)]
     public class Employee : IEmployee, IIdentity
     {
         public int Id { get; set; }

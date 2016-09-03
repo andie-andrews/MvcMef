@@ -1,6 +1,8 @@
-﻿using MvcMef.Dependencies.Models;
+﻿using System.ComponentModel.Composition;
+using MvcMef.Dependencies.Models;
 namespace MvcMef.Dto
 {
+    [Export(typeof(ILookupReference))]
     public class LookupReference : ILookupReference, IIdentity
     {
         public string Description { get; set; }

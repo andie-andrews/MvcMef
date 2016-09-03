@@ -5,11 +5,13 @@
     using System.ComponentModel.Composition;
     using System.Linq;
 
-    using MvcMef.Dependencies;
+    using Dependencies;
 
+
+    [Export(typeof(IMappingProvider))]
     [Export(typeof(MappingProvider))]
-    [PartCreationPolicy(System.ComponentModel.Composition.CreationPolicy.Shared)]
-    public class MappingProvider
+    [PartCreationPolicy(CreationPolicy.Shared)]
+    public class MappingProvider : IMappingProvider
     {
         /// <summary>
         /// Gets or sets the available mappings.
@@ -19,22 +21,22 @@
 
         public IMap ProvideProcessor(Type source, Type target)
         {
-            if (this.AvailableMappings == null || !this.AvailableMappings.Any())
+            if (AvailableMappings == null || !AvailableMappings.Any())
             {
                 throw new Exception("No mappings available");
             }
 
-            return this.AvailableMappings.First(processor => processor.CanMap(source, target));
+            return AvailableMappings.First(processor => processor.CanMap(source, target));
         }
 
         public IMap ProvideProcessorBySource(Type source)
         {
-            if (this.AvailableMappings == null || !this.AvailableMappings.Any())
+            if (AvailableMappings == null || !AvailableMappings.Any())
             {
                 throw new Exception("No mappings available");
             }
 
-            return this.AvailableMappings.First(processor => processor.CanMapToTarget(source));
+            return AvailableMappings.First(processor => processor.CanMapToTarget(source));
         }
 
     }

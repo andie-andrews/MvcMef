@@ -6,6 +6,7 @@ using MvcMef.Models;
 using MvcMef.Models.Employee;
 using System.Collections.Generic;
 using System.Linq;
+using MvcMef.Dependencies.Models;
 
 namespace MvcMef.Controllers
 {
@@ -26,19 +27,19 @@ namespace MvcMef.Controllers
         }
         public ActionResult Index()
         {
-            var vm = this.viewModelProvider.ProvideViewModel(typeof(EmployeesViewModel)) as EmployeesViewModel;
+            var vm = this.viewModelProvider.ProvideViewModel(typeof(EmployeesViewModel)) as IEmployeesViewModel;
 
             return View(vm);
         }
         public ActionResult Calculate(int? id)
         {
-            var vm = this.viewModelProvider.ProvideViewModel(typeof(EmployeeViewModel)) as EmployeeViewModel;
+            var vm = this.viewModelProvider.ProvideViewModel(typeof(EmployeeViewModel)) as IEmployeeViewModel;
             vm.IntializeEmployee(id);
             return View(vm);
         }
         public ActionResult Edit(int? id)
         {
-            var vm = this.viewModelProvider.ProvideViewModel(typeof(EmployeeViewModel)) as EmployeeViewModel;
+            var vm = this.viewModelProvider.ProvideViewModel(typeof(EmployeeViewModel)) as IEmployeeViewModel;
             vm.IntializeEmployee(id);
             return View(vm);
         }
@@ -49,11 +50,12 @@ namespace MvcMef.Controllers
         {
 
             string json = ToJson(values, new[] { "Employee.", "__RequestVerificationToken" });
-            
+
             var vm = this.viewModelProvider.ProvideViewModel(typeof(EmployeeViewModel)) as EmployeeViewModel;
             vm.Update(json);
             return View(vm);
         }
+
 
         public static string ToJson(System.Web.Mvc.FormCollection collection, string[] prefixIgnore)
         {

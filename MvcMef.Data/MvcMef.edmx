@@ -139,6 +139,12 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams>
+      <Diagram DiagramId="ba2ec0c31c744e1eb0b324d99fe4b106" Name="Diagram1">
+        <EntityTypeShape EntityType="MvcMefModel.Frequency" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcMefModel.Employee" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="MvcMefModel.FK_Employee_Fequency" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
   </Designer>
 </edmx:Edmx>

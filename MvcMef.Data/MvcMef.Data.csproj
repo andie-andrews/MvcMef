@@ -99,9 +99,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MvcMef.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="MvcMef.edmx.diagram">
-      <DependentUpon>MvcMef.edmx</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MvcMef.Dependencies\MvcMef.Dependencies.csproj">
@@ -120,17 +117,10 @@
       <LastGenOutput>MvcMef.Context.cs</LastGenOutput>
     </Content>
     <Content Include="MvcMef.edmx.sql" />
-    <Content Include="MvcMef.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="MvcMef.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MvcMef.edmx</DependentUpon>
       <LastGenOutput>MvcMef.cs</LastGenOutput>
-    </Content>
-    <Content Include="MvcMef_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>MvcMef.mdf</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>

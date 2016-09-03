@@ -12,5 +12,6 @@ namespace MvcMef.Dependencies
         IEmployee GetItem(int? id);
         List<IEmployee> GetItems();
         IEmployee Update(string employee);
+        IEmployee Update(IEmployee employee);
     }
 }

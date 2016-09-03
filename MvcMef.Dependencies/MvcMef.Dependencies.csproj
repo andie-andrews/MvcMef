@@ -54,6 +54,7 @@
     <Compile Include="IApplicationContext.cs" />
     <Compile Include="IEmployeeService.cs" />
     <Compile Include="IMapping.cs" />
+    <Compile Include="IMappingProvider.cs" />
     <Compile Include="IMefController.cs" />
     <Compile Include="IReferenceService.cs" />
     <Compile Include="IRepository.cs" />
@@ -64,6 +65,10 @@
     <Compile Include="Models\IEmployee.cs" />
     <Compile Include="Models\IIdentity.cs" />
     <Compile Include="Models\ILookupReference.cs" />
+    <Compile Include="Payload\IRequest.cs" />
+    <Compile Include="Payload\IResponse.cs" />
+    <Compile Include="Payload\Request.cs" />
+    <Compile Include="Payload\Response.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

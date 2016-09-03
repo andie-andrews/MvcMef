@@ -6,84 +6,84 @@
     using System.Linq;
     using System.Linq.Expressions;
 
-    using MvcMef.Dependencies;
-    using MvcMef.Repository.Repository.Data;
+    using Dependencies;
+    using Data;
     using Dependencies.Models;
     public class Repository<TEntity, TDto> : IRepository<TEntity, TDto>
         where TEntity : class
         where TDto : class, IIdentity
     {
-        internal DbContext Context;
+        internal IApplicationContext Context;
         internal IDbSet<TEntity> DbSet;
-        internal IMapping<TEntity,TDto> EntityToDtoMapping;
+        internal IMapping<TEntity, TDto> EntityToDtoMapping;
 
         public Repository(IApplicationContext context, MappingProvider mappingProvider)
         {
-           
-            this.Context = context as DbContext;
-            this.DbSet = context.Set<TEntity>();
-            this.EntityToDtoMapping = mappingProvider.ProvideProcessor(typeof(TEntity), typeof(TDto)) as IMapping<TEntity, TDto>;
+
+            Context = context as IApplicationContext;
+            DbSet = context.Set<TEntity>();
+            EntityToDtoMapping = mappingProvider.ProvideProcessor(typeof(TEntity), typeof(TDto)) as IMapping<TEntity, TDto>;
         }
 
         public virtual TDto FindById(object id)
         {
-            return this.EntityToDtoMapping.Map(this.DbSet.Find(id));
+            return EntityToDtoMapping.Map(DbSet.Find(id));
         }
 
         public virtual TEntity InsertGraph(TDto source)
         {
-            TEntity entity = this.EntityToDtoMapping.Map(source);
-            this.DbSet.Add(entity);
-            this.Context.SaveChanges();
+            TEntity entity = EntityToDtoMapping.Map(source);
+            DbSet.Add(entity);
+            Context.SaveChanges();
 
             return entity;
         }
 
         public virtual TEntity Update(TDto source)
         {
-            TEntity entity = this.EntityToDtoMapping.Map(source);
-            var attachment = this.DbSet.Find(source.Id);
+            TEntity entity = EntityToDtoMapping.Map(source);
+            var attachment = DbSet.Find(source.Id);
 
             // Activity does not exist in database and it's new one
             if (attachment == null)
             {
-                this.DbSet.Add(entity);
+                DbSet.Add(entity);
                 return entity;
             }
 
             // Activity already exist in database and modify it
             Context.Entry(attachment).CurrentValues.SetValues(entity);
             Context.Entry(attachment).State = EntityState.Modified;
-            this.Context.SaveChanges();
+            Context.SaveChanges();
             return entity;
         }
 
         public virtual void Delete(object id)
         {
 
-            var entity = this.DbSet.Find(id);
+            var entity = DbSet.Find(id);
             var objectState = entity as IObjectState;
             if (objectState != null)
                 objectState.State = ObjectState.Deleted;
-            this.Delete((TEntity)entity);
-            this.Context.SaveChanges();
+            Delete((TEntity)entity);
+            Context.SaveChanges();
 
         }
 
         public virtual void Delete(TDto source)
         {
-            TEntity entity = this.EntityToDtoMapping.Map(source);
-            this.DbSet.Attach(entity);
-            this.DbSet.Remove(entity);
-            this.Context.SaveChanges();
+            TEntity entity = EntityToDtoMapping.Map(source);
+            DbSet.Attach(entity);
+            DbSet.Remove(entity);
+            Context.SaveChanges();
 
         }
 
         public virtual TEntity Insert(TDto source)
         {
-            TEntity entity = this.EntityToDtoMapping.Map(source);
-            this.DbSet.Add(entity);
-            this.Context.SaveChanges();
+            TEntity entity = EntityToDtoMapping.Map(source);
+            DbSet.Add(entity);
+            Context.SaveChanges();
 
             return entity;
         }
@@ -91,7 +91,7 @@
         public virtual IRepositoryQuery<TEntity, TDto> Query()
         {
             RepositoryQuery<TEntity, TDto> repositoryGetFluentHelper =
-                new RepositoryQuery<TEntity, TDto>(this, this.EntityToDtoMapping);
+                new RepositoryQuery<TEntity, TDto>(this, EntityToDtoMapping);
 
             return repositoryGetFluentHelper;
         }
@@ -105,7 +105,7 @@
             int? page = null,
             int? pageSize = null)
         {
-            IQueryable<TEntity> query = this.DbSet;
+            IQueryable<TEntity> query = DbSet;
 
             if (includeProperties != null)
                 includeProperties.ForEach(i => { query = query.Include(i); });

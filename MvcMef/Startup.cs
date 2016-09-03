@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Web.Mvc;
 using MvcMef.Web;
 using MvcMef.Dependencies;
+using MvcMef.Models;
 
 [assembly: OwinStartupAttribute(typeof(MvcMef.Startup))]
 namespace MvcMef
@@ -17,6 +18,9 @@ namespace MvcMef
             MefBootstrap.Intialize();
 
             ControllerBuilder.Current.SetControllerFactory(new MefControllerFactory(MefBootstrap.Container));
+           // ModelBinders.Binders.DefaultBinder = new InterfaceModelBinder();
+
+
 
         }
     }

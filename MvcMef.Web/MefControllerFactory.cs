@@ -9,18 +9,25 @@ namespace MvcMef.Web
 {
     public class MefControllerFactory : DefaultControllerFactory
     {
-        private readonly CompositionContainer _container;
+        private  CompositionContainer _container;
 
         public MefControllerFactory(CompositionContainer container)
         {
-            this._container = container;
+            _container = container;
         }
 
         protected override IController GetControllerInstance(System.Web.Routing.RequestContext requestContext, Type controllerType)
         {
             IController result = null;
 
-            var export = this._container.GetExports(typeof(IMefController), null, controllerType.FullName).SingleOrDefault(x => x.Value.GetType() == controllerType);
+
+            if (!MefBootstrap.IsIntialized)
+            {
+                MefBootstrap.Intialize();
+                ControllerBuilder.Current.SetControllerFactory(new MefControllerFactory(MefBootstrap.Container));
+            }
+
+            var export = _container.GetExports(typeof(IMefController), null, controllerType.FullName).SingleOrDefault(x => x.Value.GetType() == controllerType);
 
             if (null != export)
             {
@@ -29,7 +36,7 @@ namespace MvcMef.Web
 
             if (null != result)
             {
-                this._container.SatisfyImportsOnce(result);
+                _container.SatisfyImportsOnce(result);
             }
 
             return result;

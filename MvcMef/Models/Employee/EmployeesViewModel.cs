@@ -6,8 +6,15 @@ using MvcMef.Dependencies.Models;
 
 namespace MvcMef.Models.Employee
 {
+    public interface IEmployeesViewModel
+    {
+        ExportFactory<IEmployeeService> Factory { get; set; }
+        List<IEmployee> Employees { get; }
+    }
+
     [Export(typeof(IViewModel))]
-    public class EmployeesViewModel: IViewModel
+    [Export(typeof(IEmployeesViewModel))]
+    public class EmployeesViewModel: IViewModel, IEmployeesViewModel
     {
         [Import]
         public ExportFactory<IEmployeeService> Factory { get; set; }

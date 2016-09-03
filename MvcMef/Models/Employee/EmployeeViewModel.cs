@@ -7,11 +7,22 @@ using MvcMef.Dependencies;
 using MvcMef.Dependencies.Models;
 namespace MvcMef.Models.Employee
 {
-    [Export(typeof(IViewModel))]
-    public class EmployeeViewModel : IViewModel
+    public interface IEmployeeViewModel
     {
-        public IEmployee Employee { get; private set; }
-        protected virtual IEmployeeService employeeService { get { return EmployeeServiceFactory.CreateExport().Value; } }
+        IEmployee Employee { get; set; }
+        List<ILookupReference> Fequencies { get; }
+        void IntializeEmployee(int? id);
+        void Update(IEmployee employee);
+        void Update(string employee);
+    }
+
+    [Export(typeof(IViewModel))]
+    [Export(typeof(IEmployeeViewModel))]
+    [PartCreationPolicy(System.ComponentModel.Composition.CreationPolicy.NonShared)]
+    public class EmployeeViewModel : IViewModel, IEmployeeViewModel
+    {
+        public IEmployee Employee { get;  set; }
+ 
         protected virtual IReferenceService referenceService { get { return ReferenceServiceFactory.CreateExport().Value; } }
       
         [Import]
@@ -29,14 +40,19 @@ namespace MvcMef.Models.Employee
         public void IntializeEmployee(int? id)
         {
             this.Fequencies = referenceService.GetFrequencyReferenceList();
-            this.Employee = employeeService.GetItem(id);
+            this.Employee = EmployeeServiceFactory.CreateExport().Value.GetItem(id);
         }
 
+        public void Update(IEmployee employee)
+        {
+
+            this.Employee = EmployeeServiceFactory.CreateExport().Value.Update(employee);
+        }
         public void Update(string employee)
         {
 
             this.Fequencies = referenceService.GetFrequencyReferenceList();
-            this.Employee = employeeService.Update(employee);
+            this.Employee = EmployeeServiceFactory.CreateExport().Value.Update(employee);
         }
     }
 }
