@@ -1,4 +1,4 @@
-﻿namespace Netchex.Module.Document
+﻿namespace MvcMef.Module.Document
 {
     using System;
     using System.ComponentModel.Composition;
@@ -6,8 +6,8 @@
 
     using HtmlAgilityPack;
 
-    using Netchex.Dependencies;
-    using Netchex.Dto;
+    using MvcMef.Dependencies;
+    using MvcMef.Dto;
 
     /// <summary>
     /// The remove node attributes processor used to remove attributes from nodes within a <see cref="HtmlDocument"/> based on a provided <see cref="Data.Models.DocumentNodeRule"/>.

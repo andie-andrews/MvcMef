@@ -1,11 +1,11 @@
-﻿namespace Netchex.Module.Document
+﻿namespace MvcMef.Module.Document
 {
     using System.ComponentModel.Composition;
 
     using HtmlAgilityPack;
 
-    using Netchex.Dependencies;
-    using Netchex.Dto;
+    using MvcMef.Dependencies;
+    using MvcMef.Dto;
 
     /// <summary>
     /// The encapsulate node processor used to encapsulate a node within a <see cref="HtmlDocument"/> based on a provided <see cref="DocumentNodeRule"/>.

@@ -1,4 +1,4 @@
-﻿namespace Netchex.Module.Document
+﻿namespace MvcMef.Module.Document
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,8 @@
 
     using HtmlAgilityPack;
 
-    using Netchex.Dependencies;
-    using Netchex.Dto;
+    using MvcMef.Dependencies;
+    using MvcMef.Dto;
 
     /// <summary>
     /// Object representation of an html string providing various utilities

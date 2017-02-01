@@ -1,11 +1,11 @@
-﻿namespace Netchex.Module.Document
+﻿namespace MvcMef.Module.Document
 {
     using System;
 
     using HtmlAgilityPack;
 
-    using Netchex.Dependencies;
-    using Netchex.Dto;
+    using MvcMef.Dependencies;
+    using MvcMef.Dto;
 
     /// <summary>
     /// This is a base abstract class used to create document node processor.

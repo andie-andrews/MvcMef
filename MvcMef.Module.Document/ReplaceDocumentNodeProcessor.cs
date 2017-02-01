@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace Netchex.Module.Document
+namespace MvcMef.Module.Document
 {
     using System.ComponentModel.Composition;
 
     using HtmlAgilityPack;
 
-    using Netchex.Dependencies;
-    using Netchex.Dto;
+    using MvcMef.Dependencies;
+    using MvcMef.Dto;
 
     [Export(typeof(IDocumentProcessor))]
     class ReplaceDocumentNodeProcessor : DocumentNodeProcessor, IDocumentProcessor

@@ -1,9 +1,9 @@
-﻿namespace Netchex.Module.Document
+﻿namespace MvcMef.Module.Document
 {
     using HtmlAgilityPack;
 
-    using Netchex.Dependencies;
-    using Netchex.Dto;
+    using MvcMef.Dependencies;
+    using MvcMef.Dto;
 
     /// <summary>
     /// The DocumentProcessor interface.

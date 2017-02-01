@@ -1,9 +1,10 @@
-﻿namespace Netchex.Services
+﻿namespace MvcMef.Services
 {
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Linq;
-    using Netchex.Dependencies;
+    using MvcMef.Dependencies;
+    using Module.Document;
 
     [Export(typeof(IDocumentService))]
     [PartCreationPolicy(System.ComponentModel.Composition.CreationPolicy.Shared)]
@@ -18,12 +19,12 @@
             this.repositoryWorker = repositoryWorker;
         }
 
-        protected IDocumentParser DocumentParser { get; private set; }
+        protected DocumentParser DocumentParser { get; private set; }
 
         public string CleanDocument(string dataToParse)
         {
             this.DocumentParser.LoadDocument(dataToParse);
-            IList<IDocumentNodeRule> rules = this.repositoryWorker.Repository<Netchex.Data.Rule, Dto.DocumentNodeRule>().Query().Include(x => x.ActionType).Get()
+            IList<IDocumentNodeRule> rules = this.repositoryWorker.Repository<MvcMef.Data.Rule, Dto.DocumentNodeRule>().Query().Include(x => x.ActionType).Get()
                .ToList<IDocumentNodeRule>();
 
             return this.DocumentParser.CleanDocument(rules);

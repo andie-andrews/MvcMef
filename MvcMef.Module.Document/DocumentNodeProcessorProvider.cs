@@ -1,11 +1,11 @@
-﻿namespace Netchex.Module.Document
+﻿namespace MvcMef.Module.Document
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Linq;
 
-    using Netchex.Dto;
+    using MvcMef.Dto;
 
     /// <summary>
     /// The document node processor provider provides the instance needed to process a document node rule.

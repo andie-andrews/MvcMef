@@ -4,9 +4,9 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using Netchex.Data;
+using MefMvc.Data;
 
-namespace Netchex.Services.Tests
+namespace MefMvc.Services.Tests
 {
     [TestClass]
     public class SkillServiceTests

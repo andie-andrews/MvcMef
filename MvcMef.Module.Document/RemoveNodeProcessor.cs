@@ -1,15 +1,15 @@
-﻿namespace Netchex.Module.Document
+﻿namespace MvcMef.Module.Document
 {
     using System.ComponentModel.Composition;
     using System.Linq;
 
     using HtmlAgilityPack;
 
-    using Netchex.Dependencies;
-    using Netchex.Dto;
+    using MvcMef.Dependencies;
+    using MvcMef.Dto;
 
     /// <summary>
-    /// The remove node processor used to remove nodes within a <see cref="HtmlDocument"/> based on a provided <see cref="Netchex.Data.Models.DocumentNodeRule"/>.
+    /// The remove node processor used to remove nodes within a <see cref="HtmlDocument"/> based on a provided <see cref="MvcMef.Data.Models.DocumentNodeRule"/>.
     /// The class is derived from the <see cref="DocumentNodeProcessor"/> and implements the <see cref="IDocumentProcessor"/> interface.
     /// </summary>
     [Export(typeof(IDocumentProcessor))]
@@ -27,13 +27,13 @@
         }
 
         /// <summary>
-        /// The process used by the <see cref="RemoveNodeProcessor"/> to process the specified <see cref="Netchex.Data.Models.DocumentNodeRule"/> for the provided <see cref="HtmlDocument"/>.
+        /// The process used by the <see cref="RemoveNodeProcessor"/> to process the specified <see cref="MvcMef.Data.Models.DocumentNodeRule"/> for the provided <see cref="HtmlDocument"/>.
         /// </summary>
         /// <param name="document">
         /// A <see cref="HtmlDocument"/> to be processed.
         /// </param>
         /// <param name="rule">
-        /// The <see cref="Netchex.Data.Models.DocumentNodeRule"/> used to apply the action for the <see cref="ActionType"/>.
+        /// The <see cref="MvcMef.Data.Models.DocumentNodeRule"/> used to apply the action for the <see cref="ActionType"/>.
         /// </param>
         /// <returns>
         /// A processed <see cref="HtmlDocument"/>.
